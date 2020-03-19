@@ -41,45 +41,10 @@ export class HomePage extends React.PureComponent {
    * when initial state username is not null, submit the form to load repos
    */
 
-  displayMessage = evt => {
-    let message;
-    if (evt.origin !== 'https://react-nerver-die.io') {
-      message = 'error opener';
-    } else {
-      message = `data ${evt.data} from ${evt.origin}`;
-    }
-    // eslint-disable-next-line no-console
-    console.log('message data', evt.data);
-    // eslint-disable-next-line no-console
-    // console.log('reponse', `${evt.data}`)
-    // alert(message);
-  };
-
-  postMessage = () => {
-    const windowOpener = window.opener;
-
-    if (windowOpener) {
-      windowOpener.postMessage(
-        'test message',
-        'https://api.react-nerver-die.io/posts',
-      );
-    }
-  }
-
-  handleWindowOpener = () => {
-    // eslint-disable-next-line no-unused-expressions
-    if (window.addEventListener) {
-      // eslint-disable-next-line no-undef
-      window.addEventListener('message', this.displayMessage, false);
-    }
-  }
-
   componentDidMount() {
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
     }
-
-    this.handleWindowOpener();
   }
 
   render() {
